@@ -1,0 +1,24 @@
+name: IceBan
+version: 2.1
+main: eu.icecraft.iceban.IceBan
+website: http://icecraft-mc.eu
+description: MySQL based offline-mode bans
+authors:
+  - illusion9
+softdepend: [IceAuth]
+commands:
+  sbh:
+    description: 
+    usage: Unknown command. Type \"help\" for help
+  ban:
+    description:
+    usage: Unknown command. Type \"help\" for help
+  unban:
+    description:
+    usage: Unknown command. Type \"help\" for help
+  banreason:
+    description:
+    usage: Unknown command. Type \"help\" for help
+  banhistory:
+    description:
+    usage: Unknown command. Type \"help\" for help
