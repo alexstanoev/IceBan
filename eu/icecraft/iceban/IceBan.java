@@ -85,7 +85,7 @@ public class IceBan extends JavaPlugin {
 	public void unban(BanInfo ban) {
 		String ip = sql.getIpFromBan(ban.getBanID());
 		sql.unbanName(ban.getNick());
-		sql.unbanIp(ip);
+		if(ip != null) sql.unbanIp(ip);
 	}
 
 	public String getKickMessage(BanInfo ban) {

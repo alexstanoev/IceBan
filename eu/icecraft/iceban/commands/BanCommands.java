@@ -58,10 +58,10 @@ public class BanCommands implements CommandExecutor {
 					reason = reason + " " + word;
 				}
 				reason =  reason.trim();
-				time = "30d";
-			}
 
-			if(!sender.hasPermission("iceban.longbans")) time = "1d";
+				if(!sender.hasPermission("iceban.longbans")) time = "1d";
+				else time = "30d";
+			}
 
 			int banTime;
 			if(sender.hasPermission("iceban.permabans") && permanent) banTime = 0;
@@ -71,6 +71,12 @@ public class BanCommands implements CommandExecutor {
 					sender.sendMessage(ChatColor.RED + "Invalid time string!");
 					return true;
 				}
+
+				if(!sender.hasPermission("iceban.longbans") && banTime > 86400) {
+					sender.sendMessage(ChatColor.RED + "Ban lenght was above your limit, setting to 1 day");
+					banTime = 86400;
+				}
+
 				banTime += (int) (System.currentTimeMillis() / 1000L); 
 			}
 
