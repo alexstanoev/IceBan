@@ -40,23 +40,23 @@ public class InfoCommands implements CommandExecutor {
 					sender.sendMessage(ChatColor.GOLD + "Player " + ChatColor.DARK_AQUA + args[0] + ChatColor.GOLD + " is banned:");
 
 					String msg = "";
-					msg = msg + ChatColor.AQUA;
+					msg = msg + ChatColor.GRAY;
 
-					if(result.getInt("bannedUntil") == 0) msg = msg + ChatColor.GOLD + "Perm." + ChatColor.AQUA + " ban ";
-					else msg = msg +  ChatColor.GOLD + "Temp." + ChatColor.AQUA + " ban for " + ChatColor.GOLD + Utils.getTimeString(result.getInt("bannedUntil") - result.getInt("bannedOn")) + ChatColor.AQUA;
+					if(result.getInt("bannedUntil") == 0) msg = msg + ChatColor.GOLD + "Perm" + ChatColor.GRAY + " ban ";
+					else msg = msg +  ChatColor.GOLD + "Temp" + ChatColor.GRAY + " ban for " + ChatColor.GOLD + Utils.getTimeString(result.getInt("bannedUntil") - result.getInt("bannedOn")) + ChatColor.GRAY;
 
-					msg = msg + "by " + ChatColor.GOLD + result.getString("bannedBy") + ChatColor.AQUA;
+					msg = msg + "by " + ChatColor.GOLD + result.getString("bannedBy") + ChatColor.GRAY;
 
 					Date bannedOn = new Date(result.getLong("bannedOn") * 1000L);
 					SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-					msg = msg + " on " + ChatColor.GOLD + sdf.format(bannedOn) + ChatColor.AQUA;
+					msg = msg + " on " + ChatColor.GOLD + sdf.format(bannedOn) + ChatColor.GRAY;
 
 					sender.sendMessage(msg);
-					sender.sendMessage(ChatColor.DARK_AQUA + "Reason: " + ChatColor.AQUA + result.getString("reason"));
+					sender.sendMessage(ChatColor.DARK_AQUA + "Reason: " + ChatColor.GOLD + result.getString("reason"));
 					return true;
 				}
 
-				sender.sendMessage(ChatColor.GOLD + "Player " + ChatColor.DARK_AQUA + args[0] + ChatColor.GOLD + " isn't banned");
+				sender.sendMessage(ChatColor.GOLD + "Player " + ChatColor.DARK_AQUA + args[0] + ChatColor.GOLD + " isn't banned.");
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -76,7 +76,7 @@ public class InfoCommands implements CommandExecutor {
 			try {
 				Connection connection = plugin.db.getConnection();
 
-				PreparedStatement regQ = connection.prepareStatement("SELECT * FROM bans WHERE nick = ? ORDER BY id ASC");
+				PreparedStatement regQ = connection.prepareStatement("SELECT * FROM bans WHERE nick = ? AND bannedBy IS NOT NULL ORDER BY id ASC");
 				regQ.setString(1, args[0].toLowerCase());
 				result = regQ.executeQuery();
 
@@ -89,19 +89,19 @@ public class InfoCommands implements CommandExecutor {
 					if(result.getInt("active") == 1) msg = msg + ChatColor.RED + "[Active] ";
 					else msg = msg + ChatColor.GRAY + "[Past] ";
 
-					msg = msg + ChatColor.AQUA;
+					msg = msg + ChatColor.GRAY;
 
-					if(result.getInt("bannedUntil") == 0) msg = msg + ChatColor.GOLD + "Perm." + ChatColor.AQUA + " ban ";
-					else msg = msg +  ChatColor.GOLD + "Temp." + ChatColor.AQUA + " ban for " + ChatColor.GOLD + Utils.getTimeString(result.getInt("bannedUntil") - result.getInt("bannedOn")) + ChatColor.AQUA;
+					if(result.getInt("bannedUntil") == 0) msg = msg + ChatColor.GOLD + "Perm" + ChatColor.GRAY + " ban ";
+					else msg = msg +  ChatColor.GOLD + "Temp" + ChatColor.GRAY + " ban for " + ChatColor.GOLD + Utils.getTimeString(result.getInt("bannedUntil") - result.getInt("bannedOn")) + ChatColor.GRAY;
 
-					msg = msg + "by " + ChatColor.GOLD + result.getString("bannedBy") + ChatColor.AQUA;
+					msg = msg + "by " + ChatColor.GOLD + result.getString("bannedBy") + ChatColor.GRAY;
 
 					Date bannedOn = new Date(result.getLong("bannedOn") * 1000L);
 					SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-					msg = msg + " on " + ChatColor.GOLD + sdf.format(bannedOn) + ChatColor.AQUA;
+					msg = msg + " on " + ChatColor.GOLD + sdf.format(bannedOn) + ChatColor.GRAY;
 
 					sender.sendMessage(msg);
-					sender.sendMessage(ChatColor.DARK_AQUA + "Reason: " + ChatColor.AQUA + result.getString("reason"));
+					sender.sendMessage(ChatColor.DARK_AQUA + "Reason: " + ChatColor.GOLD + result.getString("reason"));
 					sender.sendMessage(ChatColor.YELLOW + "----------");
 				}
 

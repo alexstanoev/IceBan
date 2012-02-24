@@ -22,12 +22,12 @@ public class SQLUtils {
 		try {
 			Connection connection = db.getConnection();
 			if(banType == BanType.IP_BAN) {
-				PreparedStatement regQ = connection.prepareStatement("SELECT * FROM bans WHERE ip = ? AND bannedBy IS NOT NULL AND active = 1 ORDER BY id DESC LIMIT 1");
+				PreparedStatement regQ = connection.prepareStatement("SELECT * FROM bans WHERE ip = ? AND active = 1 ORDER BY id DESC LIMIT 1");
 				regQ.setString(1, field.toLowerCase());
 
 				result = regQ.executeQuery();
 			} else {
-				PreparedStatement regQ = connection.prepareStatement("SELECT * FROM bans WHERE nick = ? AND bannedBy IS NOT NULL AND active = 1 ORDER BY id DESC LIMIT 1");
+				PreparedStatement regQ = connection.prepareStatement("SELECT * FROM bans WHERE nick = ? AND active = 1 ORDER BY id DESC LIMIT 1");
 				regQ.setString(1, field.toLowerCase());
 
 				result = regQ.executeQuery();
@@ -152,7 +152,7 @@ public class SQLUtils {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getLastWarn(String nick) {
 		ResultSet result = null;
 		try {
@@ -176,7 +176,7 @@ public class SQLUtils {
 		}
 		return null;
 	}
-	
+
 	public int rawUpdateQuery(String query) {
 		Connection connection = null;
 		try {

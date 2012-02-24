@@ -15,7 +15,7 @@ public class Utils {
 		String str = "";
 		if (n > 0) str = str + n + "d "; 
 		if (i > 0) str = str + i + "h "; 
-		if (j > 0) str = str + j + "m";  
+		if (j > 0) str = str + j + "m ";  
 
 		return str;
 	}

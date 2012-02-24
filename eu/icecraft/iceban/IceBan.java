@@ -10,7 +10,6 @@ import eu.icecraft.iceauth.IceAuth;
 import eu.icecraft.iceban.BanInfo.BanType;
 import eu.icecraft.iceban.commands.BanCommands;
 import eu.icecraft.iceban.commands.InfoCommands;
-import eu.icecraft.iceban.commands.WarnCommands;
 
 public class IceBan extends JavaPlugin {
 	public IceAuth iceAuth;
@@ -50,7 +49,7 @@ public class IceBan extends JavaPlugin {
 
 		BanCommands banCommands = new BanCommands(this);
 		InfoCommands infoCommands = new InfoCommands(this);
-		WarnCommands warnCommands = new WarnCommands(this);
+		//WarnCommands warnCommands = new WarnCommands(this);
 
 		getCommand("ban").setExecutor(banCommands);
 		getCommand("sbh").setExecutor(banCommands);
@@ -59,8 +58,8 @@ public class IceBan extends JavaPlugin {
 		getCommand("banreason").setExecutor(infoCommands);
 		getCommand("banhistory").setExecutor(infoCommands);
 
-		getCommand("warn").setExecutor(warnCommands);
-		getCommand("warnings").setExecutor(warnCommands);
+		//getCommand("warn").setExecutor(warnCommands);
+		//getCommand("warnings").setExecutor(warnCommands);
 
 		System.out.println(this + " was enabled!");
 	}
