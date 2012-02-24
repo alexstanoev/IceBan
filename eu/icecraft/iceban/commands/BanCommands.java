@@ -74,7 +74,7 @@ public class BanCommands implements CommandExecutor {
 				}
 
 				if(!sender.hasPermission("iceban.longbans") && banTime > 86400) {
-					sender.sendMessage(ChatColor.RED + "Ban lenght was above your limit, setting to 1 day");
+					sender.sendMessage(ChatColor.RED + "Ban length was above your limit, setting to 1 day");
 					banTime = 86400;
 				}
 
@@ -104,7 +104,7 @@ public class BanCommands implements CommandExecutor {
 			for(Player currPlayer : Bukkit.getServer().getOnlinePlayers()) {
 				if(currPlayer.getName().equalsIgnoreCase(nick)) currPlayer.kickPlayer(plugin.getKickMessage(newBan));
 
-				if(!silent || !currPlayer.isOp()) sender.sendMessage(ChatColor.RED + "IceBan: " + ChatColor.AQUA + nick + " was banned by " + sender.getName());
+				if(!silent || !currPlayer.isOp()) currPlayer.sendMessage(ChatColor.RED + "IceBan: " + ChatColor.AQUA + nick + " was banned by " + sender.getName());
 			}
 
 			System.out.println(sender.getName() + " banned " + nick + " with reason " + reason + " for " + (permanent ? "a long time" : time) + " ban id: " + newBan.getBanID());
