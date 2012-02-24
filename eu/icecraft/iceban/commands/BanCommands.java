@@ -102,7 +102,14 @@ public class BanCommands implements CommandExecutor {
 			BanInfo newBan = plugin.getNameBan(nick.toLowerCase());
 
 			for(Player currPlayer : Bukkit.getServer().getOnlinePlayers()) {
-				if(currPlayer.getName().equalsIgnoreCase(nick)) currPlayer.kickPlayer(plugin.getKickMessage(newBan));
+				if(currPlayer.getName().equalsIgnoreCase(nick)) {
+					currPlayer.kickPlayer(plugin.getKickMessage(newBan));
+					break;
+				}
+				if(ip != null && currPlayer.getAddress().getAddress().getHostAddress().equals(ip)) {
+					currPlayer.kickPlayer(plugin.getKickMessage(newBan));
+					break;
+				}
 
 				if(!silent || !currPlayer.isOp()) currPlayer.sendMessage(ChatColor.RED + "IceBan: " + ChatColor.AQUA + nick + " was banned by " + sender.getName());
 			}
