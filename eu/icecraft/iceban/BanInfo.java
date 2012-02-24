@@ -7,21 +7,24 @@ public class BanInfo {
 	private int bannedUntil;
 	private String bannedBy;
 	private String banMessage;
+	private String nick;
 
 	public BanInfo(BanType banType) {
 		this.banType = banType;
 	}
 
-	public BanInfo(BanType banType, int banId, String banMessage, String bannedBy) {
+	public BanInfo(BanType banType, int banId, String nick, String banMessage, String bannedBy) {
 		this.banId = banId;
 		this.banType = banType;
+		this.nick = nick;
 		this.banMessage = banMessage;
 		this.bannedBy = bannedBy;
 	}
 
-	public BanInfo(BanType banType, int banId, String banMessage, String bannedBy, boolean isTempBan, int bannedUntil) {
+	public BanInfo(BanType banType, int banId, String nick, String banMessage, String bannedBy, boolean isTempBan, int bannedUntil) {
 		this.banId = banId;
 		this.banType = banType;
+		this.nick = nick;
 		this.isTempBan = isTempBan;
 		this.bannedUntil = bannedUntil;
 		this.banMessage = banMessage;
@@ -30,6 +33,10 @@ public class BanInfo {
 
 	public int getBanID() {
 		return this.banId;
+	}
+
+	public String getNick() {
+		return this.nick;
 	}
 
 	public boolean isIpBanned() {

@@ -16,7 +16,13 @@ commands:
   unban:
     description:
     usage: Unknown command. Type \"help\" for help
+  sunban:
+    description:
+    usage: Unknown command. Type \"help\" for help
   banreason:
+    description:
+    usage: Unknown command. Type \"help\" for help
+  sbreason:
     description:
     usage: Unknown command. Type \"help\" for help
   banhistory:

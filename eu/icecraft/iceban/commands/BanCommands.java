@@ -90,16 +90,17 @@ public class BanCommands implements CommandExecutor {
 
 			for(Player currPlayer : Bukkit.getServer().getOnlinePlayers()) {
 				if(currPlayer.getName().equalsIgnoreCase(nick)) currPlayer.kickPlayer(plugin.getKickMessage(newBan));
+
+				if(!silent || !currPlayer.isOp()) sender.sendMessage(ChatColor.RED + "IceBan: " + ChatColor.AQUA + nick + " was banned by " + sender.getName());
 			}
 
-			//Utils.getTimeString(((int) (System.currentTimeMillis() / 1000L) - banTime)))
+			System.out.println(sender.getName() + " banned " + nick + " with reason " + reason + " for " + (permanent ? "a long time" : time) + " ban id: " + newBan.getBanID());
 			sender.sendMessage(ChatColor.GREEN + "Banned " + nick + " with reason " + reason + " for " + (permanent ? "a long time" : time) + " ban id: " + newBan.getBanID());
-			if(!silent) Bukkit.getServer().broadcastMessage(ChatColor.RED + "IceBan: " + ChatColor.AQUA + nick + " was banned by " + sender.getName());
 
 			return true;
 		}
 
-		if(cmdLbl.equals("unban")) {
+		if(cmdLbl.equals("unban") || cmdLbl.equals("sunban")) {
 			BanInfo ban = plugin.getNameBan(args[0]);
 			if(ban.isNameBanned()) {
 				plugin.unban(ban);

@@ -22,12 +22,12 @@ public class SQLUtils {
 		try {
 			Connection connection = db.getConnection();
 			if(banType == BanType.IP_BAN) {
-				PreparedStatement regQ = connection.prepareStatement("SELECT * FROM bans WHERE ip = ? AND active = 1 ORDER BY id DESC LIMIT 1");
+				PreparedStatement regQ = connection.prepareStatement("SELECT *, bannedBy IS NULL AS isnull FROM bans WHERE ip = ? AND active = 1 ORDER BY isnull ASC, id DESC LIMIT 1");
 				regQ.setString(1, field.toLowerCase());
 
 				result = regQ.executeQuery();
 			} else {
-				PreparedStatement regQ = connection.prepareStatement("SELECT * FROM bans WHERE nick = ? AND active = 1 ORDER BY id DESC LIMIT 1");
+				PreparedStatement regQ = connection.prepareStatement("SELECT *, bannedBy IS NULL AS isnull FROM bans WHERE nick = ? AND active = 1 ORDER BY isnull ASC, id DESC LIMIT 1");
 				regQ.setString(1, field.toLowerCase());
 
 				result = regQ.executeQuery();
@@ -35,7 +35,7 @@ public class SQLUtils {
 
 			while(result.next()) {
 				int bannedUntil = result.getInt("bannedUntil");
-				return new BanInfo(banType, result.getInt("id"), result.getString("reason"), result.getString("bannedBy"), bannedUntil == 0 ? false : true, bannedUntil);
+				return new BanInfo(banType, result.getInt("id"), result.getString("nick"), result.getString("reason"), result.getString("bannedBy"), bannedUntil == 0 ? false : true, bannedUntil);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,6 +84,18 @@ public class SQLUtils {
 			connection = db.getConnection();
 			PreparedStatement regQupd = connection.prepareStatement("UPDATE bans SET active = 0 WHERE ip = ?");
 			regQupd.setString(1, ip);
+			regQupd.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void unbanName(String name) {
+		Connection connection = null;
+		try {
+			connection = db.getConnection();
+			PreparedStatement regQupd = connection.prepareStatement("UPDATE bans SET active = 0 WHERE nick = ?");
+			regQupd.setString(1, name);
 			regQupd.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -54,7 +54,9 @@ public class IceBan extends JavaPlugin {
 		getCommand("ban").setExecutor(banCommands);
 		getCommand("sbh").setExecutor(banCommands);
 		getCommand("unban").setExecutor(banCommands);
+		getCommand("sunban").setExecutor(banCommands);
 
+		getCommand("sbreason").setExecutor(infoCommands);
 		getCommand("banreason").setExecutor(infoCommands);
 		getCommand("banhistory").setExecutor(infoCommands);
 
@@ -82,7 +84,7 @@ public class IceBan extends JavaPlugin {
 
 	public void unban(BanInfo ban) {
 		String ip = sql.getIpFromBan(ban.getBanID());
-		sql.unban(ban.getBanID());
+		sql.unbanName(ban.getNick());
 		sql.unbanIp(ip);
 	}
 
