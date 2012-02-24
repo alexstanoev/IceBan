@@ -44,7 +44,7 @@ public class IceBan extends JavaPlugin {
 
 		this.getServer().getPluginManager().registerEvents(new PlayerListeners(this), this);
 
-		int rowsChanged = sql.rawUpdateQuery("UPDATE bans SET active = 0 WHERE bannedUntil < UNIX_TIMESTAMP(NOW())");
+		int rowsChanged = sql.rawUpdateQuery("UPDATE bans SET active = 0 WHERE bannedUntil > 0 AND bannedUntil < UNIX_TIMESTAMP(NOW())");
 		System.out.println("["+this+"] Cleaned up " + rowsChanged + " expired tempbans.");
 
 		BanCommands banCommands = new BanCommands(this);
