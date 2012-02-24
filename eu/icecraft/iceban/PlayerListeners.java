@@ -23,19 +23,9 @@ public class PlayerListeners implements Listener {
 		BanInfo ban = plugin.getIPBan(ip);
 		if(ban == null) return;
 		if(ban.isIpBanned()) {
-			if(ban.getBanMessage().length() > 50) ban.setBanMessage(ban.getBanMessage().substring(0, 50) + "..");
-			String banMessage = "Banned! Reason: " + ban.getBanMessage() + ". More info at http://icecraft-mc.eu/?b=" + ban.getBanID();
-			if(ban.isTempBan()) {
-				String tmpBanMessage = ban.isTempBanActive();
-				if(tmpBanMessage == null) {
-					plugin.unban(ban);
-					return;
-				} else {
-					ban.setBanMessage("Banned for "+tmpBanMessage+"! Reason: " + ban.getBanMessage() + ". Check http://icecraft-mc.eu/?b=" + ban.getBanID());
-				}
-			} else ban.setBanMessage(banMessage);
-
-			event.disallow(Result.KICK_BANNED, ban.getBanMessage());
+			String kickMessage = plugin.getKickMessage(ban);
+			if(kickMessage == null) return; // Expired tempban
+			event.disallow(Result.KICK_BANNED, kickMessage);
 		}
 	}
 
