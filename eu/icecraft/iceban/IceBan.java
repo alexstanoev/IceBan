@@ -97,7 +97,7 @@ public class IceBan extends JavaPlugin {
 				unban(ban);
 				return null;
 			} else {
-				return "Banned for "+tmpBanMessage+"! Reason: " + ban.getBanMessage() + ". Check http://icecraft-mc.eu/?b=" + ban.getBanID();
+				return "Banned for "+tmpBanMessage.trim()+"! Reason: " + ban.getBanMessage() + ". Check http://icecraft-mc.eu/?b=" + ban.getBanID();
 			}
 		} return banMessage;
 	}

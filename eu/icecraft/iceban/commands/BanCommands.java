@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import eu.icecraft.iceban.BanInfo;
+import eu.icecraft.iceban.BanInfo.BanType;
 import eu.icecraft.iceban.IceBan;
 import eu.icecraft.iceban.Utils;
 
@@ -89,6 +90,12 @@ public class BanCommands implements CommandExecutor {
 			if(ip == null && !forceBan) {
 				sender.sendMessage(ChatColor.RED + "Player IP not found in history! Use -f to override");
 				return true;
+			}
+
+			BanInfo oldBan = plugin.getNameBan(nick.toLowerCase());
+			if(oldBan.getBanType() != BanType.NOT_BANNED) {
+				sender.sendMessage(ChatColor.RED + "Player has previous active bans, marking them as past.");
+				plugin.unban(oldBan);
 			}
 
 			plugin.sql.ban(nick, ip, banTime, reason, sender.getName());

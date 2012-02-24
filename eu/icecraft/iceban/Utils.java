@@ -11,11 +11,15 @@ public class Utils {
 		int i = (int)(unixTime / 3600L);
 		unixTime -= i * 3600;
 		int j = (int)(unixTime / 60L);
+		unixTime -= j * 60;
+		int k = (int)unixTime;
 
+		boolean showSeconds = true;
 		String str = "";
-		if (n > 0) str = str + n + "d "; 
-		if (i > 0) str = str + i + "h "; 
-		if (j > 0) str = str + j + "m ";  
+		if(n > 0) { str = str + n + "d "; showSeconds = false; }
+		if(i > 0) { str = str + i + "h "; showSeconds = false; }
+		if(j > 0) { str = str + j + "m "; showSeconds = false; }
+		if(k > 0 && showSeconds) str = str + k + "s ";
 
 		return str;
 	}

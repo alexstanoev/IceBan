@@ -39,6 +39,10 @@ public class BanInfo {
 		return this.nick;
 	}
 
+	public BanType getBanType() {
+		return this.banType;
+	}
+
 	public boolean isIpBanned() {
 		return banType == BanType.IP_BAN;
 	}
