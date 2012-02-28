@@ -98,17 +98,20 @@ public class BanCommands implements CommandExecutor {
 				plugin.unban(oldBan);
 			}
 
+			String bannedBy = sender.getName();
+			if(bannedBy.equals("NoCheatCommandSender")) bannedBy = "NoCheat";
+
 			plugin.sql.ban(nick, ip, banTime, reason, sender.getName());
 			BanInfo newBan = plugin.getNameBan(nick.toLowerCase());
 
 			for(Player currPlayer : Bukkit.getServer().getOnlinePlayers()) {
 				if(currPlayer.getName().equalsIgnoreCase(nick)) {
 					currPlayer.kickPlayer(plugin.getKickMessage(newBan));
-					break;
+					continue;
 				}
 				if(ip != null && currPlayer.getAddress().getAddress().getHostAddress().equals(ip)) {
 					currPlayer.kickPlayer(plugin.getKickMessage(newBan));
-					break;
+					continue;
 				}
 
 				if(!silent || !currPlayer.isOp()) currPlayer.sendMessage(ChatColor.RED + "IceBan: " + ChatColor.AQUA + nick + " was banned by " + sender.getName());
