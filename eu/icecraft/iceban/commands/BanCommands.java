@@ -29,6 +29,8 @@ public class BanCommands implements CommandExecutor {
 		if(!sender.hasPermission("iceban." + cmdLbl)) return false;
 
 		if(cmdLbl.equals("ban") || cmdLbl.equals("sbh")) {
+			if(args.length == 0) return false;
+
 			boolean forceBan = false;
 			boolean permanent = false;
 			boolean silent = false;
@@ -114,7 +116,7 @@ public class BanCommands implements CommandExecutor {
 					continue;
 				}
 
-				if(!silent || !currPlayer.isOp()) currPlayer.sendMessage(ChatColor.RED + "IceBan: " + ChatColor.AQUA + nick + " was banned by " + sender.getName());
+				if(!silent || currPlayer.isOp()) currPlayer.sendMessage(ChatColor.RED + "IceBan: " + ChatColor.AQUA + nick + " was banned by " + sender.getName());
 			}
 
 			System.out.println(sender.getName() + " banned " + nick + " with reason " + reason + " for " + (permanent ? "a long time" : time) + " ban id: " + newBan.getBanID());
