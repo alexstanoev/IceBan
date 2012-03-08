@@ -157,8 +157,13 @@ public class BanCommands implements CommandExecutor {
 
 			Player target = Bukkit.getServer().getPlayer(args[0]);
 
+			if(target == null) {
+				sender.sendMessage(ChatColor.RED + "Player not found!");
+				return true;
+			}
+
 			if (target.hasPermission("iceban.kick.exempt") && !sender.hasPermission("iceban.kick.exempt.override")) {
-				sender.sendMessage(ChatColor.RED + "Player is exempt from being kicked!");
+				sender.sendMessage(ChatColor.RED + "Player " + target.getName() + " is exempt from being kicked!");
 				return true;
 			}
 
