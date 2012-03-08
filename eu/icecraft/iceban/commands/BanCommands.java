@@ -116,7 +116,7 @@ public class BanCommands implements CommandExecutor {
 					continue;
 				}
 
-				if(!silent || currPlayer.isOp()) currPlayer.sendMessage(ChatColor.RED + "IceBan: " + ChatColor.AQUA + nick + " was banned by " + sender.getName());
+				if(!silent || currPlayer.isOp()) currPlayer.sendMessage(ChatColor.RED + "IceBan: " + ChatColor.AQUA + nick + " was banned by " + bannedBy);
 			}
 
 			System.out.println(sender.getName() + " banned " + nick + " with reason " + reason + " for " + (permanent ? "a long time" : time) + " ban id: " + newBan.getBanID());
@@ -133,6 +133,38 @@ public class BanCommands implements CommandExecutor {
 			} else {
 				sender.sendMessage(ChatColor.GOLD + "Player " + ChatColor.GRAY + args[0] + ChatColor.GOLD + " isn't banned.");
 			}
+			return true;
+		}
+
+		if(cmdLbl.equals("kick")) {
+			StringBuilder message = new StringBuilder();
+
+			if(args.length == 0) {
+				sender.sendMessage(ChatColor.RED + "No player specified!");
+				return true;
+			} else if(args.length == 1) {
+				message.append("Kicked!");
+			} else {
+				boolean first = true;
+				for(String arg : args) {
+					if(first) {
+						first = false;
+						continue;
+					}
+					message.append(arg).append(" ");
+				}
+			}
+
+			Player target = Bukkit.getServer().getPlayer(args[0]);
+
+			if (target.hasPermission("iceban.kick.exempt") && !sender.hasPermission("iceban.kick.exempt.override")) {
+				sender.sendMessage(ChatColor.RED + "Player is exempt from being kicked!");
+				return true;
+			}
+
+			target.kickPlayer(message.toString());
+
+			sender.sendMessage(ChatColor.YELLOW + "Kicked " + target.getName() + " with message: " + message.toString());
 			return true;
 		}
 

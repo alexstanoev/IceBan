@@ -55,6 +55,7 @@ public class IceBan extends JavaPlugin {
 		getCommand("sbh").setExecutor(banCommands);
 		getCommand("unban").setExecutor(banCommands);
 		getCommand("sunban").setExecutor(banCommands);
+		getCommand("kick").setExecutor(banCommands);
 
 		getCommand("sbreason").setExecutor(infoCommands);
 		getCommand("banreason").setExecutor(infoCommands);

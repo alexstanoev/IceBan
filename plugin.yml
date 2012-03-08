@@ -1,5 +1,5 @@
 name: IceBan
-version: 2.1
+version: 2.2
 main: eu.icecraft.iceban.IceBan
 website: http://icecraft-mc.eu
 description: MySQL based offline-mode bans
@@ -17,6 +17,9 @@ commands:
     description:
     usage: Unknown command. Type \"help\" for help
   sunban:
+    description:
+    usage: Unknown command. Type \"help\" for help
+  kick:
     description:
     usage: Unknown command. Type \"help\" for help
   banreason:
