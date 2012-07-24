@@ -75,9 +75,9 @@ public class BanCommands implements CommandExecutor {
 					return true;
 				}
 
-				if(!sender.hasPermission("iceban.longbans") && banTime > 86400) {
-					sender.sendMessage(ChatColor.RED + "Ban length was above your limit, setting to 1 day");
-					banTime = 86400;
+				if(!sender.hasPermission("iceban.longbans") && banTime > 604800) { // 604800 = 7 days
+					sender.sendMessage(ChatColor.RED + "Ban length was above your limit, setting to 7 days");
+					banTime = 604800;
 				}
 
 				banTime += (int) (System.currentTimeMillis() / 1000L); 
